@@ -24,7 +24,7 @@ function addFilm(e) {
   const director = directorElement.value;
   const url = urlElement.value;
 
-  if (title === "" || director === "" || url === " ") {
+  if (title === "" || director === "" || url === "") {
     UI.displayMessages("You should fill all Fields ", "danger");
   } else {
     const newfilm = new Film(title, director, url);
@@ -39,9 +39,7 @@ function addFilm(e) {
 }
 
 function deleteFilm(e) {
-  const filmName =
-    e.target.parentElement.previousElementSibling.previousElementSibling
-      .textContent;
+  const filmName = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
 
   if (e.target.id === "delete-film") {
     UI.deleteFilmFromUI(e.target);
