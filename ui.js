@@ -9,7 +9,7 @@ UI.prototype.addFilmToUI = function (newFilm) {
             <td><img src="${newFilm.url}" class="img-fluid img-thumbnail"></td>
             <td>${newFilm.title}</td>
             <td>${newFilm.director}</td>
-            <td><a href="#" id = "delete-film" class = "btn btn-danger">Filmi Sil</a></td>
+            <td><a href="#" id = "delete-film" class = "btn btn-danger">Delete Film</a></td>
         </tr> 
   
   `;
@@ -45,7 +45,7 @@ UI.prototype.loadAllFilms = function (films) {
             <td><img src="${film.url}" class="img-fluid img-thumbnail " style="height: 150px;width:100px"></td>
             <td>${film.title}</td>
             <td>${film.director}</td>
-            <td><a href="#" id = "delete-film" class = "btn btn-danger">Filmi Sil</a></td>
+            <td><a href="#" id = "delete-film" class = "btn btn-danger">Delete Film</a></td>
         </tr> 
   
   `;
