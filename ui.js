@@ -1,11 +1,7 @@
-function UI() {
+function UI() {}
 
-}
-
-UI.prototype.addFilmToUI = function(newFilm){
-   
-
-  const filmList = document.getElementById('films')
+UI.prototype.addFilmToUI = function (newFilm) {
+  const filmList = document.getElementById("films");
 
   filmList.innerHTML += `
   
@@ -16,51 +12,55 @@ UI.prototype.addFilmToUI = function(newFilm){
             <td><a href="#" id = "delete-film" class = "btn btn-danger">Filmi Sil</a></td>
         </tr> 
   
-  `
-}
+  `;
+};
 
-UI.prototype.clearInputs = function(element1,element2,element3){
-element1.value = '';
-element2.value = '';
-element3.value = '';
+UI.prototype.clearInputs = function (element1, element2, element3) {
+  element1.value = "";
+  element2.value = "";
+  element3.value = "";
+};
 
-}
+UI.prototype.displayMessages = function (message, type) {
+  const cardBody = document.querySelector(".card-body");
 
-UI.prototype.displayMessages = function(message,type){
+  const div = document.createElement("div");
 
-    const cardBody = document.querySelector('.card-body')
+  div.className = `alert alert-${type}`;
 
-    const div = document.createElement('div')
+  div.textContent = message;
 
-    div.className = `alert alert-${type}`;
+  cardBody.appendChild(div);
 
-    div.textContent = message
+  setTimeout(function () {
+    div.remove();
+  }, 1000);
+};
 
-    cardBody.appendChild(div);
-
-    setTimeout(function(){
-        div.remove()
-    },1000)
-}
-
-UI.prototype.loadAllFilms = function(films) {
-    const filmList = document.getElementById('films');
-    films.forEach(function(film){
-        filmList.innerHTML +=`
+UI.prototype.loadAllFilms = function (films) {
+  const filmList = document.getElementById("films");
+  films.forEach(function (film) {
+    filmList.innerHTML += `
         <tr>
-            <td><img src="${film.url}" class="img-fluid img-thumbnail " style="max-height: 100px;width:200px"></td>
+            <td><img src="${film.url}" class="img-fluid img-thumbnail " style="height: 150px;width:100px"></td>
             <td>${film.title}</td>
             <td>${film.director}</td>
             <td><a href="#" id = "delete-film" class = "btn btn-danger">Filmi Sil</a></td>
         </tr> 
   
-  `
-    })
+  `;
+  });
+};
 
-    
-}
+UI.prototype.deleteFilmFromUI = function (element) {
+  element.parentElement.parentElement.remove();
+};
 
-UI.prototype.deleteFilmFromUI= function(element){
-    element.parentElement.parentElement.remove();
+UI.prototype.clearAllFilmsFromUI = function () {
+  const filmList = document.getElementById("films");
+  // filmList.innerHTML = ''  bu sekilde silinir ama bu yontem yavas calisiyor
 
-}
+  while (filmList.firstElementChild !== null) {
+    filmList.firstElementChild.remove();
+  }
+};
