@@ -17,5 +17,14 @@ Storagefilm.prototype.getFilmsFromStorage = function() {
         films = JSON.parse(localStorage.getItem('films'));
     }
     return films
+}
 
+Storagefilm.prototype.deleteFilmFromStorage = function (filmTitle){
+    let films = this.getFilmsFromStorage();
+    films.forEach(function(film,index){
+        if(film.title === filmTitle){
+            films.splice(index,1)
+        }
+    });
+    localStorage.setItem('films',JSON.stringify(films));
 }
