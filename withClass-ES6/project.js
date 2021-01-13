@@ -5,16 +5,15 @@ const urlElement = document.querySelector("#url");
 const cardBody = document.querySelectorAll(".card-body")[1];
 const clear = document.getElementById("clear-films");
 
-const ui = new UI();
-const storage = new Storagefilm();
+
 
 eventListeners();
 
 function eventListeners() {
   form.addEventListener("submit", addFilm);
   document.addEventListener("DOMContentLoaded", function () {
-    let films = storage.getFilmsFromStorage();
-    ui.loadAllFilms(films);
+    let films = Storagefilm.getFilmsFromStorage();
+    UI.loadAllFilms(films);
   });
   cardBody.addEventListener("click", deleteFilm);
   clear.addEventListener("click", clearAllFilms);
@@ -26,16 +25,16 @@ function addFilm(e) {
   const url = urlElement.value;
 
   if (title === "" || director === "" || url === " ") {
-    ui.displayMessages("You should fill all Fields ", "danger");
+    UI.displayMessages("You should fill all Fields ", "danger");
   } else {
     const newfilm = new Film(title, director, url);
 
-    ui.addFilmToUI(newfilm);
-    storage.addFilmToStorage(newfilm);
-    ui.displayMessages("This Film was added successfully", "success");
+    UI.addFilmToUI(newfilm);
+    Storagefilm.addFilmToStorage(newfilm);
+    UI.displayMessages("This Film was added successfully", "success");
   }
 
-  ui.clearInputs(titleElement, urlElement, directorElement);
+  UI.clearInputs(titleElement, urlElement, directorElement);
   e.preventDefault;
 }
 
@@ -45,15 +44,15 @@ function deleteFilm(e) {
       .textContent;
 
   if (e.target.id === "delete-film") {
-    ui.deleteFilmFromUI(e.target);
-    storage.deleteFilmFromStorage(filmName);
-    ui.displayMessages("You deleted a film successfully", "success");
+    UI.deleteFilmFromUI(e.target);
+    Storagefilm.deleteFilmFromStorage(filmName);
+    UI.displayMessages("You deleted a film successfully", "success");
   }
 }
 
 function clearAllFilms() {
   if (confirm("Are you sure that want to remove all films")) {
-    ui.clearAllFilmsFromUI();
-    storage.clearAllFilmsFromStorage();
+    UI.clearAllFilmsFromUI();
+    Storagefilm.clearAllFilmsFromStorage();
   }
 }
