@@ -1,22 +1,30 @@
 
-const form = document.getElementById('film-form');
-const titleElement =document.querySelector('#title');
-const directorElement = document.querySelector('#director')
-const urlElement = document.querySelector('#url')
+const form = document.querySelector('#film-form');
+const titleElement = document.querySelector('#title');
+const directorElement = document.querySelector('#director');
+const urlElement = document.querySelector('#url');
+const cardBody =document.querySelectorAll('.card-body')[1]
 
 
 const ui = new UI();
+const storage = new Storagefilm();
 
-eventListener();
+eventListeners()
 
-function eventListener(){
+function eventListeners(){
     form.addEventListener('submit',addFilm);
+    document.addEventListener('DOMContentLoaded',function(){
+        let films = storage.getFilmsFromStorage();
+        ui.loadAllFilms(films)
+    })
+    cardBody.addEventListener('click',deleteFilm)
 }
 
 function addFilm(e){
-    const title = titleElement.value
-    const director = directorElement.value
-    const url = urlElement.value
+    const title = titleElement.value;
+    console.log("🚀 ~ file: project.js ~ line 23 ~ addFilm ~ title", title)
+    const director = directorElement.value;
+    const url = urlElement.value;
 
     if (title === '' || director === '' || url === ' '){
        ui.displayMessages('You must fill all Fields ','danger')
@@ -24,10 +32,16 @@ function addFilm(e){
         const newfilm = new Film(title,director,url)
 
         ui.addFilmToUI(newfilm);
-
-        ui.displayMessages('This Film was added successfully','success')
+        storage.addFilmToStorage(newfilm);
+        ui.displayMessages('This Film was added successfully','success');
     }
 
     ui.clearInputs(titleElement,urlElement,directorElement)
     e.preventDefault
+}
+
+function deleteFilm(e){
+    if (e.target.id === 'delete-film'){
+        ui.deleteFilmFromUI(e.target);
+    }
 }

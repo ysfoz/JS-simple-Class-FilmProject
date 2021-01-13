@@ -1,6 +1,4 @@
-function UI (){
-
-    
+function UI() {
 
 }
 
@@ -43,4 +41,26 @@ UI.prototype.displayMessages = function(message,type){
     setTimeout(function(){
         div.remove()
     },1000)
+}
+
+UI.prototype.loadAllFilms = function(films) {
+    const filmList = document.getElementById('films');
+    films.forEach(function(film){
+        filmList.innerHTML +=`
+        <tr>
+            <td><img src="${film.url}" class="img-fluid img-thumbnail " style="max-height: 100px;width:200px"></td>
+            <td>${film.title}</td>
+            <td>${film.director}</td>
+            <td><a href="#" id = "delete-film" class = "btn btn-danger">Filmi Sil</a></td>
+        </tr> 
+  
+  `
+    })
+
+    
+}
+
+UI.prototype.deleteFilmFromUI= function(element){
+    element.parentElement.parentElement.remove();
+
 }
